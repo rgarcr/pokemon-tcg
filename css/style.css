@@ -1,0 +1,51 @@
+/******************************************
+/* CSS
+/*******************************************/
+
+/* Box Model Hack */
+*{
+  box-sizing: border-box;
+}
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+img{
+  display: block;
+  margin: 0 auto;
+  max-width: 300px;
+  max-height: 400px;
+}
+
+
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
+body{
+  text-align: center;
+  background-color: #dddddd;
+}
+
+.search{
+  margin-bottom: 2%;
+}
+
+.set{
+  min-width: 250px;
+}
+
+
+.cards-results{
+  display: grid;
+  /*grid-template-columns: 1fr 1fr 1fr 1fr; */
+  grid-template-columns: repeat( auto-fit, minmax(400px, 1fr) );
+  gap: 15px;
+}
+
+.cards-results section{
+  border: 1px solid black;
+}
+
+.cards-results ul li{
+  text-align: start;
+}

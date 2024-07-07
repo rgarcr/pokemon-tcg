@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="This is where your description goes">
+	<meta name="keywords" content="one, two, three">
+
+	<title>Title in the tab</title>
+
+	<!-- external CSS link -->
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+	<section class="search">
+		<h1>Search Pokemon Card</h1>
+		<label for="search-name">Search by name:</label>
+		<input type="text" name="" value="" placeholder="search" id="search-name">
+		<label for="set-select">Search by set:</label>
+		<select name="sets" id="set-select" class="set">
+			<option value="">-select by set-</option>
+		</select>
+		<label for="order-cards-by">Order by:</label>
+		<select name="orderby" id="order-cards-by">
+			<option value="">--</option>
+			<option value="name">name</option>
+			<option value="cardmarket.prices.averageSellPrice">price low</option>
+			<option value="-cardmarket.prices.averageSellPrice">price high</option>
+			<option value="set.series">series</option>
+			<option value="set.name">set</option>
+			<option value="rarity">rarity</option>
+
+		</select>
+		<button type="button" name="button">Get Pokemon</button>
+	</section>
+	<section class="cards-results">
+		<!--  
+		<section class="card">
+			<h2>Name</h2>
+			<img src="img/pokemon.jpeg" alt="">
+			<ul>
+				<li class="types">Type: <span></span></li>
+				<li class="attack1">Attack1: <span></span></li>
+				<li class="attack2">Attack2: <span></span></li>
+				<li class="rarity">Rarity: <span></span></li>
+				<li class="avgPrice">Avg Sell Price: <span></span></li>
+			</ul>
+
+		</section>
+	-->
+	</section>
+
+
+
+	<script type="text/javascript" src="js/main.js"></script>
+</body>
+
+</html>
