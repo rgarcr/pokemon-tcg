@@ -3,14 +3,14 @@
 /*******************************************/
 
 /* Box Model Hack */
-*{
+* {
   box-sizing: border-box;
 }
 
 /******************************************
 /* LAYOUT
 /*******************************************/
-img{
+img {
   display: block;
   margin: 0 auto;
   max-width: 300px;
@@ -21,31 +21,48 @@ img{
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
-body{
+body {
   text-align: center;
   background-color: #dddddd;
 }
 
-.search{
+.search {
   margin-bottom: 2%;
 }
 
-.set{
+.set {
   min-width: 250px;
 }
 
 
-.cards-results{
+.cards-results {
   display: grid;
-  /*grid-template-columns: 1fr 1fr 1fr 1fr; */
-  grid-template-columns: repeat( auto-fit, minmax(400px, 1fr) );
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 15px;
 }
 
-.cards-results section{
+.cards-results section {
   border: 1px solid black;
 }
 
-.cards-results ul li{
+.cards-results ul li {
   text-align: start;
+}
+
+
+/* Media queries*/
+@media (max-width:1000px) {
+  .search {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 2rem;
+  }
+}
+
+/* Media queries*/
+@media (max-width:500px) {
+  .search {
+    font-size: 1.5rem;
+  }
 }
