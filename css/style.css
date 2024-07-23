@@ -53,6 +53,11 @@ body {
 /* Media queries*/
 @media (max-width:1000px) {
   .search {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
     display: flex;
     flex-direction: column;
     gap: 5px;
