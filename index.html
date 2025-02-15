@@ -15,28 +15,35 @@
 
 <body>
 	<section class="search">
-		<h1>Search Pokemon Card</h1>
-		<label for="search-name">Search by name:</label>
-		<input type="text" name="" value="" placeholder="search" id="search-name">
-		<label for="set-select">Search by set:</label>
-		<select name="sets" id="set-select" class="set">
-			<option value="">-select by set-</option>
-		</select>
-		<label for="order-cards-by">Order by:</label>
-		<select name="orderby" id="order-cards-by">
-			<option value="">--</option>
-			<option value="name">name</option>
-			<option value="cardmarket.prices.averageSellPrice">price low</option>
-			<option value="-cardmarket.prices.averageSellPrice">price high</option>
-			<option value="set.series">series</option>
-			<option value="set.name">set</option>
-			<option value="rarity">rarity</option>
+		<div class="container">
+			<h1>Search Pokemon Card</h1>
+			<label for="search-name">Search by name:</label>
+			<input type="text" name="" value="" placeholder="search" id="search-name">
+			<label for="set-select">Search by set:</label>
+			<select name="sets" id="set-select" class="set">
+				<option value="">-select by set-</option>
+			</select>
+			<label for="order-cards-by">Order by:</label>
+			<select name="orderby" id="order-cards-by">
+				<option value="">--</option>
+				<option value="name">name</option>
+				<option value="cardmarket.prices.averageSellPrice">price low</option>
+				<option value="-cardmarket.prices.averageSellPrice">price high</option>
+				<option value="set.series">series</option>
+				<option value="set.name">set</option>
+				<option value="rarity">rarity</option>
 
-		</select>
-		<button type="button" name="button">Get Pokemon</button>
+			</select>
+			<button class="btn-search" type="button" name="button">Get Pokemon</button>
+		</div>
 	</section>
-	<section class="cards-results">
-	</section>
+	
+	<div class="container">
+		<section class="cards-results">
+		</section>
+	</div>
+
+	<img src="img/arrow-up.svg" alt="arrow-up-button" class="btn-scroll-up"/>
 
 
 

@@ -24,6 +24,13 @@ img {
 body {
   text-align: center;
   background-color: #dddddd;
+  font-size: 1rem;
+  font-size: clamp(1rem, 0.8571428571428572rem + 0.7142857142857143vw, 1.5rem);
+}
+
+.container {
+  max-width: 90rem;
+  margin-inline: auto;
 }
 
 .search {
@@ -31,7 +38,7 @@ body {
 }
 
 .set {
-  min-width: 250px;
+  width: 364px;
 }
 
 
@@ -45,14 +52,41 @@ body {
   border: 1px solid black;
 }
 
+.cards-results ul {
+  padding: 0;
+  list-style: none;
+  display: grid;
+  place-content: center;
+}
+
 .cards-results ul li {
   text-align: start;
+
 }
+
+.cards-results img:hover {
+  transform: scale(1.15);
+}
+
+.btn-scroll-up {
+  position: fixed;
+  right: 4%;
+  bottom: 0;
+  width: 1.5em;
+  font-size: 1.5rem;
+  z-index: 1;
+  cursor: pointer;
+  display: none;
+  padding: 5px;
+  background-color: #fff500;
+  border-radius: 45%;
+}
+
 
 
 /* Media queries*/
 @media (max-width:1000px) {
-  .search {
+  .search .container {
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -63,11 +97,30 @@ body {
     gap: 5px;
     font-size: 2rem;
   }
+
+  .container {
+    margin: 0;
+  }
+
+  .set {
+    width: 100%;
+  }
+
+
+
+  .container input,
+  .container select {
+    text-align: center;
+  }
+
 }
 
-/* Media queries*/
 @media (max-width:500px) {
-  .search {
+  .search .container {
     font-size: 1.5rem;
+  }
+
+  .cards-results img:hover {
+    transform: none;
   }
 }

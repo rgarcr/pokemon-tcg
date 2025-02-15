@@ -6,7 +6,7 @@ have multiple pages or display for long results
 */
 
 
-document.querySelector('button').addEventListener('click', getFetch)
+document.querySelector('.btn-search').addEventListener('click', getFetch)
 
 function getFetch() {
   const choice = document.querySelector('input').value || '';
@@ -96,7 +96,7 @@ function createCard(containerAppend, name, series, set, img, types, attacks, rar
   pkmSeries.innerHTML = "Series: " + series;
   pkmSet.innerHTML = "Set: " + set;
   pkmImg.src = img;
-  pkmTypes.innerHTML = "Types: " + types;
+  pkmTypes.innerHTML = "Type: " + types;
   //check if multiple attacks
   //maybe create muliple elements for attacks or add to single element
   if (attacks.length > 1 && typeof (attacks[0]) === 'object' && typeof (attacks[1]) === 'object') {
@@ -115,8 +115,9 @@ function createCard(containerAppend, name, series, set, img, types, attacks, rar
 
   pkmRarity.innerHTML = "Rarity: " + rarity;
   //some cards do no have attribute cardmarket
-
-  pkmAvgPrice.innerHTML = "SellPrice: " + cardMrkt;
+  if(typeof +cardMrkt == 'number')
+    cardMrkt = Number(cardMrkt).toFixed(2);
+  pkmAvgPrice.innerHTML = "AVG SellPrice: $" + cardMrkt;
 
   list.append(pkmTypes, attack1, attack2, pkmRarity, pkmAvgPrice);
   cardContainr.append(h2Name, pkmSet, pkmSeries, pkmImg, list);
@@ -169,3 +170,24 @@ function getCardsBySet(setID) {
     });
 }
 
+let btnScroll = document.querySelector(".btn-scroll-up");
+
+
+// Scroll up to top of page when scroll button clicked
+btnScroll.addEventListener("click", (e) => {
+  window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scroll to top
+
+});
+
+
+//display or hide button when window scrolls
+// When the user scrolls down 20px from the top, show the button
+window.onscroll = function () { scrollFunction() };
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    btnScroll.style.display = "block";
+  } else {
+    btnScroll.style.display = "none";
+  }
+}
