@@ -9,6 +9,12 @@ have multiple pages or display for long results
 document.querySelector('.btn-search').addEventListener('click', getFetch)
 
 function getFetch() {
+  //display searching when search btn clicked
+  document.querySelector(".notify-searching").style.visibility = "visible";
+
+  //hide no results when search btn is clicked
+  document.querySelector(".notify-no-search").style.visibility = "hidden";
+
   const choice = document.querySelector('input').value || '';
   const option = document.querySelector('#set-select').value || "";
   const orderbyOp = document.querySelector('#order-cards-by').value;
@@ -37,9 +43,23 @@ function getFetch() {
 
   console.log(url);
 
+
   fetch(url)
     .then(res => res.json()) // parse response as JSON
     .then(data => {
+      //hide searching when data comes in
+      document.querySelector(".notify-searching").style.visibility = "hidden";
+
+      if(data.count == 0){
+        document.querySelector(".notify-no-search").style.visibility = "visible";
+      
+      }
+       else{
+         document.querySelector(".notify-no-search").style.visibility = "hidden";
+       }
+      
+
+
       //console.log(data)
       console.log(data);
 
@@ -74,9 +94,11 @@ function getFetch() {
 
 
     })
+  
     .catch(err => {
       console.log(`error ${err}`)
     });
+  
 }
 
 //create html for card
@@ -115,7 +137,7 @@ function createCard(containerAppend, name, series, set, img, types, attacks, rar
 
   pkmRarity.innerHTML = "Rarity: " + rarity;
   //some cards do no have attribute cardmarket
-  if(typeof +cardMrkt == 'number')
+  if (cardMrkt != 'N/A')
     cardMrkt = Number(cardMrkt).toFixed(2);
   pkmAvgPrice.innerHTML = "AVG SellPrice: $" + cardMrkt;
 
