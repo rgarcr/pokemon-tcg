@@ -12,6 +12,9 @@ function getFetch() {
   //display searching when search btn clicked
   document.querySelector(".notify-searching").style.visibility = "visible";
 
+  document.querySelectorAll(".notify-searching__dot").forEach(node =>
+    node.classList.toggle("none"));
+
   //hide no results when search btn is clicked
   document.querySelector(".notify-no-search").style.visibility = "hidden";
 
@@ -49,15 +52,18 @@ function getFetch() {
     .then(data => {
       //hide searching when data comes in
       document.querySelector(".notify-searching").style.visibility = "hidden";
+      document.querySelectorAll(".notify-searching__dot").forEach(node =>
+        node.classList.toggle("none"));
 
-      if(data.count == 0){
+
+      if (data.count == 0) {
         document.querySelector(".notify-no-search").style.visibility = "visible";
-      
+
       }
-       else{
-         document.querySelector(".notify-no-search").style.visibility = "hidden";
-       }
-      
+      else {
+        document.querySelector(".notify-no-search").style.visibility = "hidden";
+      }
+
 
 
       //console.log(data)
@@ -94,11 +100,11 @@ function getFetch() {
 
 
     })
-  
+
     .catch(err => {
       console.log(`error ${err}`)
     });
-  
+
 }
 
 //create html for card
