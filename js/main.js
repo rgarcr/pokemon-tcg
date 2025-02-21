@@ -11,7 +11,7 @@ document.querySelector('.btn-search').addEventListener('click', getFetch)
 function getFetch() {
   //display searching when search btn clicked
   document.querySelector(".notify-searching").style.visibility = "visible";
-
+ //toggle none so animation starts when searching
   document.querySelectorAll(".notify-searching__dot").forEach(node =>
     node.classList.toggle("none"));
 
@@ -52,6 +52,7 @@ function getFetch() {
     .then(data => {
       //hide searching when data comes in
       document.querySelector(".notify-searching").style.visibility = "hidden";
+      //toggle animation off so its not running when results come up
       document.querySelectorAll(".notify-searching__dot").forEach(node =>
         node.classList.toggle("none"));
 
@@ -153,7 +154,7 @@ function createCard(containerAppend, name, series, set, img, types, attacks, rar
 
 }
 
-//search by set
+//fill select options for sets
 //https://api.pokemontcg.io/v2/sets"
 //search set and order by releaseDate "https://api.pokemontcg.io/v2/sets?&orderBy=releaseDate"
 fetch("https://api.pokemontcg.io/v2/sets?&orderBy=series")
@@ -209,11 +210,11 @@ btnScroll.addEventListener("click", (e) => {
 
 
 //display or hide button when window scrolls
-// When the user scrolls down 20px from the top, show the button
+// When the user scrolls down 100px from the top, show the button
 window.onscroll = function () { scrollFunction() };
 
 function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
     btnScroll.style.display = "block";
   } else {
     btnScroll.style.display = "none";

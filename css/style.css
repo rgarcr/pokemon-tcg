@@ -87,7 +87,7 @@ body {
 
 /* class to set display none  */
 .none{
-  display: none;
+  animation: none;
 }
 
 
