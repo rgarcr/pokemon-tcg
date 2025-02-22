@@ -5,6 +5,8 @@ create elements for each card entry
 have multiple pages or display for long results
 */
 
+// hide section-input when page loads
+document.querySelector(".section-input").style.visibility = "hidden";
 
 document.querySelector('.btn-search').addEventListener('click', getFetch)
 
@@ -154,9 +156,14 @@ function createCard(containerAppend, name, series, set, img, types, attacks, rar
 
 }
 
+// have a loader when the data from the api is requested and waiting to complete
+//hide search options 
+//when data is fully retrieved hide loader and show search options
+
+
 //fill select options for sets
 //https://api.pokemontcg.io/v2/sets"
-//search set and order by releaseDate "https://api.pokemontcg.io/v2/sets?&orderBy=releaseDate"
+//"https://api.pokemontcg.io/v2/sets?&orderBy=releaseDate"
 fetch("https://api.pokemontcg.io/v2/sets?&orderBy=series")
   .then(res => res.json()) // parse response as JSON
   .then(data => {
@@ -168,10 +175,17 @@ fetch("https://api.pokemontcg.io/v2/sets?&orderBy=series")
       option.innerHTML = set.name;
       select.appendChild(option);
     });
+    // show section-input when data from api fills selects in options
+    document.querySelector(".section-input").style.visibility = "visible";
+    
+    // hider loader
+    document.querySelector(".search__loader").style.display = "none";
   })
   .catch(err => {
     console.log(`error ${err}`)
   });
+
+  
 
 function searchBySeries() {
   //&orderBy=-set.releaseDate"
