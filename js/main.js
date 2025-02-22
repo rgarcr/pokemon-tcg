@@ -11,6 +11,10 @@ document.querySelector(".section-input").style.visibility = "hidden";
 document.querySelector('.btn-search').addEventListener('click', getFetch)
 
 function getFetch() {
+   
+  //make button inactive when search goes through
+  document.querySelector(".btn-search").classList.toggle("disabled");
+
   //display searching when search btn clicked
   document.querySelector(".notify-searching").style.visibility = "visible";
  //toggle none so animation starts when searching
@@ -100,7 +104,8 @@ function getFetch() {
         createCard(cardResults, card.name, card.set.series, card.set.name, card.images.small, cardTypes, cardAttacks, card.rarity, cardMrktPrice);
 
       });
-
+      //after data loads toggle disable off for button search
+      document.querySelector(".btn-search").classList.toggle("disabled");
 
     })
 

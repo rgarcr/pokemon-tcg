@@ -182,6 +182,13 @@ body {
   border-radius: 45%;
 }
 
+/* disable element */
+.disabled{
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.65;
+
+}
 
 
 /* Media queries*/
