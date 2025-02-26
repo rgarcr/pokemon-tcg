@@ -99,7 +99,7 @@ function getFetch() {
         //let cardMrktPrice = card?.cardmarket != undefined ? card.cardmarket.prices.averageSellPrice : 'N/A';
         let cardMrktPrice = cardMrkt != 'N/A' ? card.cardmarket.prices.averageSellPrice : 'N/A';
 
-        let cardTypes = card.types ||= 'N/A';
+        let cardTypes = card.types ||= card.supertype ||= 'N/A';
         let cardAttacks = card.attacks ||= ["N/A", "N/A"]
         createCard(cardResults, card.name, card.set.series, card.set.name, card.images.small, cardTypes, cardAttacks, card.rarity, cardMrktPrice);
 
