@@ -1,23 +1,15 @@
-/*
-Limit how many to display by search
-create elements for each card entry
-have multiple pages or display for long results
-*/
 
-// organize code 
-// Have a function to search cards with user input
-// have a function to populate cards
-//function to build url 
-//function to hide loader and search
-//function to show loader and search
-// change getFetch to searchCards
+document.querySelector(".section-input").style.visibility = "hidden"; //hide search options while fetch is called to get options for sets
 
+document.querySelector('.btn-search').addEventListener('click', getCards) 
 
-// hide section-input when page loads
-document.querySelector(".section-input").style.visibility = "hidden";
+//event listener for btn to scroll up
+document.querySelector(".btn-scroll-up").addEventListener("click", (e) => {
+  window.scrollTo({ top: 0, behavior: 'smooth' }); 
+});
 
-document.querySelector('.btn-search').addEventListener('click', getCards)
-const btnScroll = document.querySelector(".btn-scroll-up");
+//show or hide scroll button
+window.addEventListener("scroll", scrollFunction);
 
 
 async function getCards() {
@@ -52,12 +44,12 @@ async function getCards() {
 
   // clear previous results
   if (resultsContainer.childElementCount > 0) 
-    cardResults.innerHTML = '';
+    resultsContainer.innerHTML = '';
 
   data.data.forEach(card => createCard(resultsContainer, card)); 
   btnSearch.classList.toggle("disabled"); //enable btn-search
 
-} //end getCards
+} 
 
 
 
@@ -81,9 +73,9 @@ async function getCardData(url) {
 
 // function to build url from user  input
 function buildURL() {
-  const choice = document.querySelector('input').value || '';
-  const option = document.querySelector('#set-select').value || "";
-  const orderbyOp = document.querySelector('#order-cards-by').value;
+  const choice = document.querySelector('#search-name').value || ''; //change choice to search
+  const option = document.querySelector('#set-select').value || ""; //change option to set
+  const orderbyOp = document.querySelector('#order-cards-by').value; //change orderbyOp to orderBy
   console.log(option, 'option');
 
   //search with id
@@ -95,8 +87,9 @@ function buildURL() {
 
 
   //build url to search by user input
-  // reduce redundancy 
+  // rewrite  the logic below to reduce redundancy and make easier to read
   let url = `https://api.pokemontcg.io/v2/cards?`;
+
   if (option.length > 0 && choice.length > 0)
     url += `q=set.id:${option} name:${choice.toLocaleLowerCase()}*`;
   else if (option.length > 0 && choice.length <= 0)
@@ -113,7 +106,7 @@ function buildURL() {
 }
 
 
-// creater a container and add properties from card
+// create a container and add properties from card, not all cards have the same properties
 function createCard(container, card) {
   console.log(card)
   let cardContainer = document.createElement("section");
@@ -139,7 +132,6 @@ function createCard(container, card) {
 
   pkmRarity.innerHTML = "Rarity: " + (card.rarity || "N/A");
 
-  //some cards do no have attribute cardmarket
   pkmAvgPrice.innerHTML = "AVG SellPrice: $" +
     (card.cardmarket ? Number(card.cardmarket.prices.averageSellPrice).toFixed(2) : "N/A");
 
@@ -152,6 +144,11 @@ function createCard(container, card) {
 // have a loader when the data from the api is requested and waiting to complete
 //hide search options 
 //when data is fully retrieved hide loader and show search options
+
+//********************************************************************************************************** */ 
+//create function to hide section input for search options
+//create function/functions to hide loader, notifySearch lbl and animations, hide no results lbl
+
 
 
 //fill select options for sets
@@ -208,17 +205,9 @@ function getCardsBySet(setID) {
 
 
 
-// Scroll up to top of page when scroll button clicked
-btnScroll.addEventListener("click", (e) => {
-  window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scroll to top
-
-});
-
 
 //display or hide button when window scrolls
 // When the user scrolls down 100px from the top, show the button
-window.addEventListener("scroll", scrollFunction);
-
 function scrollFunction() {
   if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
     btnScroll.style.display = "block";
