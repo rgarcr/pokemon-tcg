@@ -1,11 +1,11 @@
 
 document.querySelector(".section-input").style.visibility = "hidden"; //hide search options while fetch is called to get options for sets
 
-document.querySelector('.btn-search').addEventListener('click', getCards) 
+document.querySelector('.btn-search').addEventListener('click', getCards)
 
 //event listener for btn to scroll up
 document.querySelector(".btn-scroll-up").addEventListener("click", (e) => {
-  window.scrollTo({ top: 0, behavior: 'smooth' }); 
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
 //show or hide scroll button
@@ -33,6 +33,10 @@ async function getCards() {
   searchLblDots.forEach(node =>
     node.classList.toggle("none"));
 
+  // clear previous results
+  if (resultsContainer.childElementCount > 0)
+    resultsContainer.innerHTML = '';
+
   // display no results if no cards are found, enable button, and end function
   if (!data || data.count == 0) {
     noResultsLbl.style.visibility = "visible";
@@ -42,14 +46,10 @@ async function getCards() {
 
   noResultsLbl.style.visibility = "hidden"; //hide no results
 
-  // clear previous results
-  if (resultsContainer.childElementCount > 0) 
-    resultsContainer.innerHTML = '';
-
-  data.data.forEach(card => createCard(resultsContainer, card)); 
+  data.data.forEach(card => createCard(resultsContainer, card));
   btnSearch.classList.toggle("disabled"); //enable btn-search
 
-} 
+}
 
 
 
@@ -73,33 +73,26 @@ async function getCardData(url) {
 
 // function to build url from user  input
 function buildURL() {
-  const choice = document.querySelector('#search-name').value || ''; //change choice to search
-  const option = document.querySelector('#set-select').value || ""; //change option to set
+  const searchName = document.querySelector('#search-name').value.trim().toLocaleLowerCase(); //change choice to search
+  const setOption = document.querySelector('#set-select').value; //change option to set
   const orderbyOp = document.querySelector('#order-cards-by').value; //change orderbyOp to orderBy
-  console.log(option, 'option');
-
-  //search with id
-  //https://api.pokemontcg.io/v2/cards/xy1-1  //Venusaur-EX
-  //https://api.pokemontcg.io/v2/cards/base1-4 //Charizard
 
   //search with q
-  //https://api.pokemontcg.io/v2/cards?q=name:pikachu
-
+  //ex: https://api.pokemontcg.io/v2/cards?q=name:pikachu
 
   //build url to search by user input
-  // rewrite  the logic below to reduce redundancy and make easier to read
   let url = `https://api.pokemontcg.io/v2/cards?`;
+  let queryArr = [];
 
-  if (option.length > 0 && choice.length > 0)
-    url += `q=set.id:${option} name:${choice.toLocaleLowerCase()}*`;
-  else if (option.length > 0 && choice.length <= 0)
-    url += `q=set.id:${option}`;
-  else if (choice.length > 0 && option.length <= 0)
-    url += `q=name:${choice.toLocaleLowerCase()}*`;
-  if (orderbyOp.length > 0 && (option.length > 0 || choice.length > 0))
-    url += `&orderBy=${orderbyOp}`
-  else if (orderbyOp.length > 0 && (option.length <= 0 && choice.length <= 0))
-    url += `orderBy=${orderbyOp}`;
+  //if value in setOp add to query
+  if (setOption) queryArr.push(`set.id:${setOption}`);
+  //if value in name add to query
+  if (searchName) queryArr.push(`name:${searchName}`);
+  //add to url if array has set or name
+  if (queryArr.length > 0) url += `q=${queryArr.join(" ")}`;
+
+  //if value in orderBy add to query
+  if (orderbyOp) url += `&orderBy=${orderbyOp}`;
 
   console.log(url);
   return url;
@@ -210,8 +203,8 @@ function getCardsBySet(setID) {
 // When the user scrolls down 100px from the top, show the button
 function scrollFunction() {
   if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-    btnScroll.style.display = "block";
+    document.querySelector(".btn-scroll-up").style.display = "block";
   } else {
-    btnScroll.style.display = "none";
+    document.querySelector(".btn-scroll-up").style.display = "none";
   }
 }
