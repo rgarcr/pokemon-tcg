@@ -23,7 +23,7 @@ img {
 /*******************************************/
 
 
-
+/* To Do */
 /* create animation for loader
 
   have a loader display spinning a circular img, maybe use inset, change position to fixed 
@@ -37,6 +37,10 @@ img {
   
   create style to hide the loader when data is complete and show section search input
 */
+
+
+/* Create max-width for one card */
+
 /* loader style */
 .search .container {
   position: relative;
@@ -67,13 +71,30 @@ img {
   }
 }
 
+@keyframes spinAndGrow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* end loader style */
+
+
+
+
 
 body {
   text-align: center;
   background-color: #dddddd;
   font-size: 1rem;
   font-size: clamp(1rem, 0.8571428571428572rem + 0.7142857142857143vw, 1.5rem);
+  /* background-image: url("../img/pokemon.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover; */
 }
 
 .container {
@@ -97,50 +118,52 @@ body {
   padding: 0.75rem 1rem;
 }
 
-.notify-searching,
-.notify-no-search {
+.notify-searching{
   visibility: hidden;
 }
 
-/* Animations for the search dots */
-.notify-searching__dot {
-  display: inline-block;
-  margin: .5rem;
-  animation: scaling 2.5s ease-in-out infinite;
+/*  */
+.notify-searching {
+  margin-top: 5em;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);}
+
+
+/* animation for spin and grow */
+.poke-ball {
+  max-width: 12%;
+  animation-name: spinAndGrow;
+  animation-duration: 3000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
-@keyframes scaling {
+@keyframes spinAndGrow {
 
-  0%,
-  100% {
-    transform: scale(0.2);
+  0% {
+    transform: rotate(0deg) scale(1)
   }
 
   50% {
-    transform: scale(1);
+    transform: rotate(180deg) scale(1.5);
   }
+
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+
 }
 
-/* delay for animation */
-
-.notify-searching__dot:nth-child(1) {
-  animation-delay: 0.2s;
-}
-
-.notify-searching__dot:nth-child(2) {
-  animation-delay: 0.4s;
-}
-
-.notify-searching__dot:nth-child(3) {
-  animation-delay: 0.6s;
+.notify-no-search{
+  display: none;
 }
 
 /* class to set animation none  */
 .none {
   animation: none;
 }
-
-
 
 .cards-results {
   display: grid;
@@ -183,7 +206,7 @@ body {
 }
 
 /* disable element */
-.disabled{
+.disabled {
   pointer-events: none;
   cursor: not-allowed;
   opacity: 0.65;

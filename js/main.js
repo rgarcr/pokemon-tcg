@@ -1,4 +1,11 @@
+// To do
+//********************************************************************************************************** */ 
+//create function to hide section input for search options
+//create function/functions to hide loader, notifySearch lbl and animations, hide no results lbl
+//organize code
 
+
+fillSets(); //fill sets
 document.querySelector(".section-input").style.visibility = "hidden"; //hide search options while fetch is called to get options for sets
 
 document.querySelector('.btn-search').addEventListener('click', getCards)
@@ -13,25 +20,23 @@ window.addEventListener("scroll", scrollFunction);
 
 
 async function getCards() {
-
   const btnSearch = document.querySelector(".btn-search");
   const searchLbl = document.querySelector(".notify-searching");
-  const searchLblDots = document.querySelectorAll(".notify-searching__dot");
   const noResultsLbl = document.querySelector(".notify-no-search");
   const resultsContainer = document.querySelector(".cards-results");
+  const pokeball = document.querySelector(".poke-ball");
 
   btnSearch.classList.toggle("disabled"); //disable btn when searching
   searchLbl.style.visibility = "visible"; //show searching lbl and animation
-  searchLblDots.forEach(node =>
-    node.classList.toggle("none"));
-  noResultsLbl.style.visibility = "hidden"; //hide no results lbl
+  pokeball.classList.toggle("none");//show animation pokeball 
 
   const url = buildURL(); //get url
   const data = await getCardData(url); //get sata from url
 
+  await delayLoader(2000); // delay for 2 second
+
   searchLbl.style.visibility = "hidden"; //hide searching animation after results come in
-  searchLblDots.forEach(node =>
-    node.classList.toggle("none"));
+  pokeball.classList.toggle("none")//hide animation pokeball 
 
   // clear previous results
   if (resultsContainer.childElementCount > 0)
@@ -39,35 +44,29 @@ async function getCards() {
 
   // display no results if no cards are found, enable button, and end function
   if (!data || data.count == 0) {
-    noResultsLbl.style.visibility = "visible";
+    noResultsLbl.style.display = "block";
     btnSearch.classList.toggle("disabled");
     return;
   }
 
-  noResultsLbl.style.visibility = "hidden"; //hide no results
-
+  noResultsLbl.style.display = "none"; //hide no results
   data.data.forEach(card => createCard(resultsContainer, card));
   btnSearch.classList.toggle("disabled"); //enable btn-search
-
 }
-
-
 
 // fetch data and return data
 async function getCardData(url) {
   try {
     const response = await fetch(url);
-    if (!response.ok) {
+    if (!response.ok) 
       throw new Error(`Response status: ${response.status}`);
-    }
-
+    
     return await response.json();
   } catch (error) {
     //if theres an error send a default response 
     console.error('Failed to fetch card data', error.message);
     return { count: 0, data: [] };
   }
-
 }
 
 
@@ -134,22 +133,12 @@ function createCard(container, card) {
 
 }
 
-// have a loader when the data from the api is requested and waiting to complete
-//hide search options 
-//when data is fully retrieved hide loader and show search options
+//function to fill select options sets
+async function fillSets() {
+  try {
+    const res = await fetch("https://api.pokemontcg.io/v2/sets?&orderBy=series");
+    const data = await res.json(); // parse response as JSON
 
-//********************************************************************************************************** */ 
-//create function to hide section input for search options
-//create function/functions to hide loader, notifySearch lbl and animations, hide no results lbl
-
-
-
-//fill select options for sets
-//https://api.pokemontcg.io/v2/sets"
-//"https://api.pokemontcg.io/v2/sets?&orderBy=releaseDate"
-fetch("https://api.pokemontcg.io/v2/sets?&orderBy=series")
-  .then(res => res.json()) // parse response as JSON
-  .then(data => {
     console.log(data)
     let select = document.querySelector("#set-select");
     data.data.forEach(set => {
@@ -159,15 +148,18 @@ fetch("https://api.pokemontcg.io/v2/sets?&orderBy=series")
       select.appendChild(option);
     });
     // show section-input when data from api fills selects in options
+    await delayLoader("1000");
     document.querySelector(".section-input").style.visibility = "visible";
-
     // hider loader
     document.querySelector(".search__loader").style.display = "none";
-  })
-  .catch(err => {
-    console.log(`error ${err}`)
-  });
 
+
+  }
+  catch (error) {
+    console.error('Failed to fetch card data', error.message);
+  }
+
+}
 
 
 function searchBySeries() {
@@ -196,9 +188,6 @@ function getCardsBySet(setID) {
     });
 }
 
-
-
-
 //display or hide button when window scrolls
 // When the user scrolls down 100px from the top, show the button
 function scrollFunction() {
@@ -208,3 +197,10 @@ function scrollFunction() {
     document.querySelector(".btn-scroll-up").style.display = "none";
   }
 }
+
+// function to delay loader
+function delayLoader(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+

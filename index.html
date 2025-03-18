@@ -35,22 +35,20 @@
 				</select>
 
 				<button class="btn-search" type="button" name="button">Search Pokemon</button>
-				<p class="notify-searching">Searching
-					<span class="notify-searching__dot none">.</span class="notify-searching__dot">
-					<span class="notify-searching__dot none">.</span>
-					<span class="notify-searching__dot none">.</span>
-				</p>
-				<p class="notify-no-search">No Results Found</p>
+				<div class="notify-searching">
+					<img class="poke-ball none" src="img/pokeball-reg.png" alt="pokeball">
+				</div>
 			</section>
 			<div class="search__loader">
-				<img src="img/circle-notch.svg" alt="circle-notch">
+				<img src="img/pokeball-black-line.png" alt="poke-ball-notch">
 			</div>
 
 		</div>
 	</section>
 
 
-	<div class="container">
+	<div class="container results-container">
+		<p class="notify-no-search">No Results Found</p>
 		<section class="cards-results">
 		</section>
 	</div>
