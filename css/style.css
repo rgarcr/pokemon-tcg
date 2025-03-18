@@ -54,7 +54,7 @@ img {
 }
 
 .search__loader img {
-  max-width: 4%;
+  max-width: 2em;
   animation-name: spin;
   animation-duration: 1000ms;
   animation-iteration-count: infinite;
@@ -82,10 +82,6 @@ img {
 }
 
 /* end loader style */
-
-
-
-
 
 body {
   text-align: center;
@@ -133,7 +129,7 @@ body {
 
 /* animation for spin and grow */
 .poke-ball {
-  max-width: 12%;
+  max-width: 2.5em;
   animation-name: spinAndGrow;
   animation-duration: 3000ms;
   animation-iteration-count: infinite;
