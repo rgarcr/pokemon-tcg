@@ -24,19 +24,7 @@ img {
 
 
 /* To Do */
-/* create animation for loader
-
-  have a loader display spinning a circular img, maybe use inset, change position to fixed 
-  transform for rotation, keyframes
-    
-
-  style the section search-input to hide the content until the data from the api has completed
-  the data retrieval 
-
-
-  
-  create style to hide the loader when data is complete and show section search input
-*/
+/* Organize and clean up code */
 
 
 /* Create max-width for one card */
@@ -88,9 +76,6 @@ body {
   background-color: #dddddd;
   font-size: 1rem;
   font-size: clamp(1rem, 0.8571428571428572rem + 0.7142857142857143vw, 1.5rem);
-  /* background-image: url("../img/pokemon.jpeg");
-  background-repeat: no-repeat;
-  background-size: cover; */
 }
 
 .container {
@@ -102,9 +87,31 @@ body {
   margin-bottom: 2%;
 }
 
-.set {
-  width: 26%;
+.search__form {
+  margin: 0 auto;
 }
+
+.form__input{
+  margin: 0 auto;
+  width: 80%;
+}
+
+.search__form input,
+.search__form select {
+  padding: 1px 2px;
+}
+
+
+/* Utility */
+.column {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 1em;
+  gap: .25rem;
+}
+
+
 
 .btn-search {
   display: block;
@@ -114,7 +121,7 @@ body {
   padding: 0.75rem 1rem;
 }
 
-.notify-searching{
+.notify-searching {
   visibility: hidden;
 }
 
@@ -124,7 +131,8 @@ body {
   position: absolute;
   top: 60%;
   left: 50%;
-  transform: translate(-50%, -50%);}
+  transform: translate(-50%, -50%);
+}
 
 
 /* animation for spin and grow */
@@ -152,7 +160,7 @@ body {
 
 }
 
-.notify-no-search{
+.notify-no-search {
   display: none;
 }
 
@@ -161,14 +169,10 @@ body {
   animation: none;
 }
 
-.cards-results {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 15px;
-}
+/* results container */
 
 .cards-results section {
-  border: 1px solid black;
+  border-bottom: 1px solid black;
 }
 
 .cards-results ul {
@@ -183,9 +187,6 @@ body {
 
 }
 
-.cards-results img:hover {
-  transform: scale(1.15);
-}
 
 .btn-scroll-up {
   position: fixed;
@@ -212,46 +213,28 @@ body {
 
 
 /* Media queries*/
-@media (max-width:62.5rem) {
-  .search .section-input {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -moz-flex;
-    display: -webkit-flex;
+/* 1000px  */
+@media (min-width:62.5rem) {
+
+  .row {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
+    flex-direction: row;
+    justify-content: space-evenly;
 
-  .container {
-    margin: 0;
-  }
-
-  .set {
-    width: inherit;
-  }
-
-
-
-  .container input,
-  .container select {
-    text-align: center;
-  }
-
-}
-
-@media (max-width:37.5rem) {
-  .search .container {
-    /* font-size: 1.5rem; */
   }
 
   .cards-results {
-    display: block;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 15px;
   }
 
   .cards-results img:hover {
-    transform: none;
+    transform: scale(1.15);
+  }
+
+  .cards-results section {
+    border: 1px solid black;
   }
 
 }
