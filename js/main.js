@@ -20,6 +20,7 @@ window.addEventListener("scroll", scrollFunction);
 
 
 async function getCards() {
+  try{
   const btnSearch = document.querySelector(".btn-search");
   const searchLbl = document.querySelector(".notify-searching");
   const noResultsLbl = document.querySelector(".notify-no-search");
@@ -45,13 +46,21 @@ async function getCards() {
   // display no results if no cards are found, enable button, and end function
   if (!data || data.count == 0) {
     noResultsLbl.style.display = "block";
-    btnSearch.classList.toggle("disabled");
+    //btnSearch.classList.toggle("disabled");
     return;
   }
 
   noResultsLbl.style.display = "none"; //hide no results
   data.data.forEach(card => createCard(resultsContainer, card));
-  btnSearch.classList.toggle("disabled"); //enable btn-search
+ }
+ catch(error){
+  console.error('Failed to fetch card data', error.message);
+  alert("An error occurred while retrieving cards. Please try again.");
+ }
+ finally{
+  document.querySelector(".btn-search").classList.toggle("disabled"); //enable btn-search
+
+ }
 }
 
 // fetch data and return data
@@ -203,4 +212,13 @@ function delayLoader(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+//create function to hide content
+function hideNode(node){
+  
+}
+
+//create function to show content
+function showNode(node){
+  
+}
 
