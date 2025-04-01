@@ -27,11 +27,13 @@ img {
 /* Organize and clean up code */
 
 
-/* Create max-width for one card */
-
 /* loader style */
 .search .container {
   position: relative;
+}
+
+.search__title {
+  margin-top: 0;
 }
 
 .search__loader {
@@ -71,11 +73,12 @@ img {
 
 /* end loader style */
 
+
 body {
   text-align: center;
-  background-color: #dddddd;
   font-size: 1rem;
   font-size: clamp(1rem, 0.8571428571428572rem + 0.7142857142857143vw, 1.5rem);
+  background-color: hsl(0, 0%, 96%);
 }
 
 .container {
@@ -85,15 +88,16 @@ body {
 
 .search {
   margin-bottom: 2%;
+  padding: 1em 0;
 }
 
 .search__form {
   margin: 0 auto;
 }
 
-.form__input{
+.form__input {
   margin: 0 auto;
-  width: 80%;
+  width: 50%;
 }
 
 .search__form input,
@@ -111,14 +115,13 @@ body {
   gap: .25rem;
 }
 
-
-
 .btn-search {
   display: block;
   margin-inline: auto;
   margin-top: 2em;
   border-radius: 6.25rem;
   padding: 0.75rem 1rem;
+  background-color: hsl(0, 0%, 100%);
 }
 
 .notify-searching {
@@ -164,10 +167,7 @@ body {
   display: none;
 }
 
-/* class to set animation none  */
-.none {
-  animation: none;
-}
+
 
 /* results container */
 
@@ -202,6 +202,11 @@ body {
   border-radius: 45%;
 }
 
+/* hide content */
+.hide-content {
+  visibility: hidden;
+}
+
 /* disable element */
 .disabled {
   pointer-events: none;
@@ -210,6 +215,10 @@ body {
 
 }
 
+/* class to set animation none  */
+.no-animation {
+  animation: none;
+}
 
 
 /* Media queries*/
@@ -235,6 +244,10 @@ body {
 
   .cards-results section {
     border: 1px solid black;
+  }
+
+  .form__input{
+    width: 100%;
   }
 
 }

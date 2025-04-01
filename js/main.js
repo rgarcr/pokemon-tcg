@@ -1,12 +1,10 @@
 // To do
 //********************************************************************************************************** */ 
-//create function to hide section input for search options
 //create function/functions to hide loader, notifySearch lbl and animations, hide no results lbl
 //organize code
 
 
 fillSets(); //fill sets
-document.querySelector(".section-input").style.visibility = "hidden"; //hide search options while fetch is called to get options for sets
 
 document.querySelector('.btn-search').addEventListener('click', getCards)
 
@@ -29,15 +27,15 @@ async function getCards() {
 
   btnSearch.classList.toggle("disabled"); //disable btn when searching
   searchLbl.style.visibility = "visible"; //show searching lbl and animation
-  pokeball.classList.toggle("none");//show animation pokeball 
+  pokeball.classList.toggle("no-animation");//show animation pokeball 
 
   const url = buildURL(); //get url
   const data = await getCardData(url); //get sata from url
 
-  await delayLoader(2000); // delay for 2 second
+  await delayLoader(2000); // delay for 2 seconds
 
   searchLbl.style.visibility = "hidden"; //hide searching animation after results come in
-  pokeball.classList.toggle("none")//hide animation pokeball 
+  pokeball.classList.toggle("no-animation")//hide animation pokeball 
 
   // clear previous results
   if (resultsContainer.childElementCount > 0)
@@ -108,6 +106,9 @@ function buildURL() {
 
 
 // create a container and add properties from card, not all cards have the same properties
+//with destructor? not sure if worth it
+//grab all property names, cards without properties give a default value
+
 function createCard(container, card) {
   console.log(card)
   let cardContainer = document.createElement("section");
@@ -158,7 +159,7 @@ async function fillSets() {
     });
     // show section-input when data from api fills selects in options
     await delayLoader("1000");
-    document.querySelector(".section-input").style.visibility = "visible";
+    document.querySelector(".section-input").classList.toggle("hide-content");
     // hider loader
     document.querySelector(".search__loader").style.display = "none";
 
